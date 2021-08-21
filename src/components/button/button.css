@@ -1,0 +1,26 @@
+.button {
+  box-sizing: border-box;
+  width: 47%;
+  height: 47%;
+  cursor: pointer;
+}
+
+.button-1 {
+  background-color: greenyellow;
+}
+
+.button-1:hover {
+  background-color: #b2fdd4;
+}
+
+.button-2 {
+  background-color: red;
+}
+
+.button-3 {
+  background-color: yellow;
+}
+
+.button-4 {
+  background-color: blue;
+}
