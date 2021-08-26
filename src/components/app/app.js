@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './app.css';
 
+import getSound from '../../services/audio-signal';
 import getRandomNum from '../../services/get-random-num/get-random-num';
 import ButtonTile from '../button-tile/button-tile';
 
@@ -14,13 +15,13 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    this.iterator();
+    setTimeout(() => this.iterator(), 1000);
   }
 
 
   // звук и визуал кнопки клике 
-  makeButtonActive = (btn, ms = 500) => {
-    // здесь надо играть звук
+  makeButtonActive = (btn, id, ms = 400) => {
+    getSound(id);
     btn.classList.add('active');
     setTimeout(() => btn.classList.remove('active'), ms); 
   }
@@ -30,7 +31,7 @@ export default class App extends Component {
   iterator = (i = 0, arr = this.state.sampleOrder) => {
     if (i === arr.length) return;
     const currentButton = document.body.querySelector(`.button-${arr[i]}`);
-    this.makeButtonActive(currentButton);
+    this.makeButtonActive(currentButton, arr[i]);
     return setTimeout( () => this.iterator(i += 1), 500);
   };
 
@@ -51,7 +52,7 @@ export default class App extends Component {
 
   onClickButton = (ev, id) => {
 
-    this.makeButtonActive(ev.target, 200);
+    this.makeButtonActive(ev.target, id, 300);
     const newRepeatOrder = [...this.state.repeatOrder, id];
     
     if (!this.isInputCorrect(newRepeatOrder)) {
@@ -76,11 +77,7 @@ export default class App extends Component {
         },
         1000
       );
-
-
     };
-
-
 
   };
 
