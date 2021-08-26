@@ -8,7 +8,6 @@ const Button = (props) => {
     <div className={`button button-${buttonIndex}`} 
     onClick={(ev) => onClickButton(ev, buttonIndex)}
     >
-      123
     </div>
   );
 }

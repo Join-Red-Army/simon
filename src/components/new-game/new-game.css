@@ -1,0 +1,30 @@
+.new-game {
+  width: 150px;
+  height: 150px;
+  margin: 40px auto;
+
+  border: 2px solid #ff12f3;
+  border-radius: 50%;
+  background-color: transparent;
+  box-shadow: 0px 0px 60px #ff12f3;
+
+  font-size: 20px;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  opacity: 1;
+  transition: all .3s linear;
+}
+
+.new-game:hover {
+  border: 2px solid #00ff80;
+  box-shadow: 0px 0px 60px #00ff80;
+}
+
+.new-game.inactive {
+  opacity: 0;
+}
