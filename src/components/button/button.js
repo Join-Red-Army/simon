@@ -6,7 +6,7 @@ const Button = (props) => {
 
   return (
     <div className={`button button-${buttonIndex}`} 
-    onClick={() => onClickButton(buttonIndex)}
+    onClick={(ev) => onClickButton(ev, buttonIndex)}
     >
       123
     </div>

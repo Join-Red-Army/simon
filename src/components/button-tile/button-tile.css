@@ -1,10 +1,11 @@
 .ButtonTile {
-  width: 300px;
-  height: 300px;
-  background-color: thistle;
+  margin: 0 auto;
+  width: 450px;
+  height: 450px;
+  background-color: transparent;
 
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* align-items: center; */
   flex-wrap: wrap;
 }
