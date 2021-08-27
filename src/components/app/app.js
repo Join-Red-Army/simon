@@ -51,7 +51,7 @@ export default class App extends Component {
   // правильная ли нажата кнопка
   isInputCorrect = (arr) => {
     const checkedIndex = arr.length - 1;
-    console.log(this.state.sampleOrder[checkedIndex], arr[checkedIndex]);
+    console.log(this.state.sampleOrder[checkedIndex], arr[checkedIndex]); // test
     return this.state.sampleOrder[checkedIndex] == arr[checkedIndex];
   }
 
@@ -63,11 +63,13 @@ export default class App extends Component {
     const newRepeatOrder = [...this.state.repeatOrder, id];
     
     if (!this.isInputCorrect(newRepeatOrder)) {
+      // test
       console.log('input incorrect');
       this.setState((state) => {
         return {
           isGameRunning: false,
-          sampleOrder: []
+          sampleOrder: [],
+          repeatOrder: []
         }
       })
       // return ошибка, очистить всё
@@ -94,6 +96,7 @@ export default class App extends Component {
 
   };
 
+  
   launchNewGame = () => {
 
     // получить первые 3 семпла для начала игры
@@ -105,7 +108,8 @@ export default class App extends Component {
     this.setState( (state) => {
       return { 
         isGameRunning: true,
-        sampleOrder: startedSamples
+        sampleOrder: startedSamples,
+        repeatOrder: []
       };
     });
     
