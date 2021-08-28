@@ -52,7 +52,7 @@ export default class App extends Component {
   isInputCorrect = (arr) => {
     const checkedIndex = arr.length - 1;
     console.log(this.state.sampleOrder[checkedIndex], arr[checkedIndex]); // test
-    return this.state.sampleOrder[checkedIndex] == arr[checkedIndex];
+    return this.state.sampleOrder[checkedIndex] === Number(arr[checkedIndex]);
   }
 
 

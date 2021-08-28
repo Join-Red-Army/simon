@@ -1,5 +1,5 @@
-.ButtonTile {
-  margin: 10vh auto;
+.button-tile {
+  margin: 10vh auto 0;
   width: 450px;
   height: 450px;
   background-color: transparent;
@@ -9,4 +9,11 @@
   /* align-items: center; */
   flex-wrap: wrap;
   touch-action: manipulation;
+}
+
+@media (orientation: portrait) and (max-aspect-ratio: 2/3) {
+  .button-tile {
+    width: 100vw;
+    height: 100vw;
+  }
 }

@@ -8,7 +8,7 @@ export default class ButtonTile extends Component {
     const {onClickButton} = this.props;
 
     return (
-      <div className="ButtonTile">
+      <div className="button-tile">
         <Button buttonIndex="1" onClickButton={onClickButton}/>
         <Button buttonIndex="2" onClickButton={onClickButton}/>
         <Button buttonIndex="3" onClickButton={onClickButton}/>
