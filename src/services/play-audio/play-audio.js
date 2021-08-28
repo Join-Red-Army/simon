@@ -10,25 +10,9 @@ const audioFiles = {
   4: blue
 };
 
-let audioElement = new Audio();
 
 function playAudio(id) {
-  if (!audioElement.ended) {
-    audioElement = new Audio(audioFiles[id]);
-  }
-  audioElement.play();
+    new Audio(audioFiles[id]).play();
 };
 
-
 export default playAudio;
-
-// старый код, который не работает в мобилках
-
-// const AudioSignal = (id) => {
-//   let signal = document.createElement('audio');
-//   signal.src = audioFiles[id];
-//   signal.autoplay = true;
-//   document.body.append(signal);
-//   setTimeout(() => signal.remove(), 1000)
-//   return;
-// };
