@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './app.css';
 
 // services
-import getSound from '../../services/audio-signal';
+import playAudio from '../../services/play-audio';
 import getRandomNum from '../../services/get-random-num/get-random-num';
 
 // components
@@ -25,7 +25,7 @@ export default class App extends Component {
 
   // звук и визуал кнопки клике 
   makeButtonActive = (btn, id, ms = 400) => {
-    getSound(id);
+    playAudio(id);
     btn.classList.add('active');
     setTimeout(() => btn.classList.remove('active'), ms); 
   }
