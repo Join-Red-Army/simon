@@ -8,11 +8,13 @@ import getRandomNum from '../../services/get-random-num/get-random-num';
 // components
 import ButtonTile from '../button-tile/button-tile';
 import NewGame from '../new-game';
+import ScoreTitle from '../score-title/score-title';
 
 export default class App extends Component {
   state = {
     sampleOrder: [],
     repeatOrder: [],
+    score: 0,
     isFrozen: false,
     isGameRunning: false,
     error: false
@@ -33,7 +35,12 @@ export default class App extends Component {
 
   // функция обхода sampleOrder
   iterator = (i = 0, arr = this.state.sampleOrder) => {
-    if (i === arr.length || !this.state.isGameRunning) return;
+    if (i === arr.length || !this.state.isGameRunning) {
+      this.setState({ isFrozen: false }); 
+      return;
+    };
+
+    this.setState({ isFrozen: true });
     const currentButton = document.body.querySelector(`.button-${arr[i]}`);
     this.makeButtonActive(currentButton, arr[i]);
     return setTimeout( () => this.iterator(i += 1), 500);
@@ -57,6 +64,10 @@ export default class App extends Component {
 
 
   onClickButton = (ev, id) => {
+    if (this.state.isFrozen) {
+      return;
+    }
+
     this.makeButtonActive(ev.target, id, 300);
     if (!this.state.isGameRunning) return;
 
@@ -68,6 +79,7 @@ export default class App extends Component {
       this.setState((state) => {
         return {
           isGameRunning: false,
+          score: 0,
           sampleOrder: [],
           repeatOrder: []
         }
@@ -82,7 +94,7 @@ export default class App extends Component {
     if (this.state.sampleOrder.length === newRepeatOrder.length) {
       console.log('new round');
       this.setState( (state) => {
-        return { repeatOrder: [] }
+        return { repeatOrder: [], score: this.state.sampleOrder.length }
       });
       
       setTimeout(
@@ -118,13 +130,14 @@ export default class App extends Component {
   }
 
   render() {
-    const newGame = this.state.isGameRunning ? null : 
-    <NewGame launchNewGame={() => this.launchNewGame}/>;
+    // const title = ;
 
     return(
       <div>
         <ButtonTile onClickButton={this.onClickButton}/>
-        { newGame }
+        { this.state.isGameRunning ? 
+          <ScoreTitle score={this.state.score}/> :
+          <NewGame launchNewGame={() => this.launchNewGame}/> }
       </div>
     );
   }
