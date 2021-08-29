@@ -25,7 +25,7 @@ export default class App extends Component {
   }
 
 
-  // звук и визуал кнопки клике 
+  // звук и визуал кнопки при клике 
   makeButtonActive = (btn, id, ms = 400) => {
     playAudio(id);
     btn.classList.add('active');
@@ -60,31 +60,46 @@ export default class App extends Component {
     const checkedIndex = arr.length - 1;
     console.log(this.state.sampleOrder[checkedIndex], arr[checkedIndex]); // test
     return this.state.sampleOrder[checkedIndex] === Number(arr[checkedIndex]);
-  }
+  };
 
 
-  onClickButton = (ev, id) => {
-    if (this.state.isFrozen) {
-      return;
-    }
+  // подсветить очки и добавить затемняющую маску 
+  showFinalScore = () => {
+    [...document.getElementById('score-container').children]
+    .forEach((el) => el.classList.add('active'))
+  };
 
-    this.makeButtonActive(ev.target, id, 300);
-    if (!this.state.isGameRunning) return;
 
-    const newRepeatOrder = [...this.state.repeatOrder, id];
-    
-    if (!this.isInputCorrect(newRepeatOrder)) {
-      // test
-      console.log('input incorrect');
+  // сброс очков и последовательностей
+  restartGame = (ms) => {
+    setTimeout(() => {
       this.setState((state) => {
         return {
           isGameRunning: false,
+          isFrozen: false,
           score: 0,
           sampleOrder: [],
           repeatOrder: []
         }
       })
-      // return ошибка, очистить всё
+    }, ms);
+  };
+
+
+  // пользователь нажимает на цветную кнопку
+  onClickButton = (ev, id) => {
+    if (this.state.isFrozen) return;
+
+    this.makeButtonActive(ev.target, id, 300);
+    if (!this.state.isGameRunning) return;
+
+    const newRepeatOrder = [...this.state.repeatOrder, id];
+
+    if (!this.isInputCorrect(newRepeatOrder)) {
+      console.log('input incorrect');
+      this.showFinalScore();
+      this.restartGame(2000);
+      return;
     };
 
     this.setState( (state) => {

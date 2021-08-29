@@ -7,8 +7,9 @@ export default class ScoreTitle extends Component {
     const { score } = this.props;
 
     return (
-      <div className='score-title'>
-        {score}
+      <div id='score-container'>
+        <div className='score-title' id='ScoreTitle'>{score}</div>
+        <div className='score-mask' id='ScoreTitle'></div>
       </div>
     );
   }
