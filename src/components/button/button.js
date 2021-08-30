@@ -10,6 +10,7 @@ const Button = (props) => {
     // onClick={(ev) => onClickButton(ev, buttonIndex)}
     // onPointerUp={(ev) => onClickButton(ev, buttonIndex)}
     onPointerDown={(ev) => onClickButton(ev, buttonIndex)}
+    
     >
     </div>
   );

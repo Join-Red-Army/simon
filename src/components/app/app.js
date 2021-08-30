@@ -4,6 +4,7 @@ import './app.css';
 // services
 import playAudio from '../../services/play-audio';
 import getRandomNum from '../../services/get-random-num/get-random-num';
+import Mask from '../mask';
 
 // components
 import ButtonTile from '../button-tile/button-tile';
@@ -17,12 +18,12 @@ export default class App extends Component {
     score: 0,
     isFrozen: false,
     isGameRunning: false,
+    isMaskShowing: false,
     error: false
   };
 
-  componentDidMount() {
-    // setTimeout(() => this.iterator(), 1000);
-  }
+  // componentDidMount() {
+  // }
 
 
   // звук и визуал кнопки при клике 
@@ -39,7 +40,6 @@ export default class App extends Component {
       this.setState({ isFrozen: false }); 
       return;
     };
-
     this.setState({ isFrozen: true });
     const currentButton = document.body.querySelector(`.button-${arr[i]}`);
     this.makeButtonActive(currentButton, arr[i]);
@@ -65,8 +65,11 @@ export default class App extends Component {
 
   // подсветить очки и добавить затемняющую маску 
   showFinalScore = () => {
-    [...document.getElementById('score-container').children]
-    .forEach((el) => el.classList.add('active'))
+    this.setState((state) => {
+      return {isMaskShowing: true}
+    });
+    [...document.body.getElementsByClassName('score')]
+      .forEach((el) => el.classList.add('active'));
   };
 
 
@@ -77,6 +80,7 @@ export default class App extends Component {
         return {
           isGameRunning: false,
           isFrozen: false,
+          isMaskShowing: false,
           score: 0,
           sampleOrder: [],
           repeatOrder: []
@@ -125,7 +129,6 @@ export default class App extends Component {
 
   
   launchNewGame = () => {
-
     // получить первые 3 семпла для начала игры
     let startedSamples = [];
     for (let i = 0; i < 3; i += 1) {
@@ -141,18 +144,21 @@ export default class App extends Component {
     });
     
     setTimeout(() => this.iterator(), 500);
-
   }
 
-  render() {
-    // const title = ;
 
+  render() {
     return(
       <div>
         <ButtonTile onClickButton={this.onClickButton}/>
+        
         { this.state.isGameRunning ? 
-          <ScoreTitle score={this.state.score}/> :
+          <ScoreTitle score={this.state.score}/> 
+          :
           <NewGame launchNewGame={() => this.launchNewGame}/> }
+
+        {this.state.isMaskShowing ? <Mask /> : null}
+
       </div>
     );
   }
